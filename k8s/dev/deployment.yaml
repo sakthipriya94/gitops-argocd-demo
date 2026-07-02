@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: observability-app
+  namespace: default
+  labels:
+    app: observability-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: observability-app
+  template:
+    metadata:
+      labels:
+        app: observability-app
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.25          # using nginx as a simple demo app
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
